@@ -1,67 +1,82 @@
 .nav {
-  width: 100%;
   background-color: black;
   border-top: 1px solid white;
+  position: relative;
+  width: 100%;
 
   &__container {
-    position: relative;
-    margin: 0 auto;
     max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin: 0 auto;
   }
 
-  &__menu,
-  .subMenu {
-    width: 100%;
+  &__menu {
     display: flex;
     justify-content: center;
     list-style: none;
   }
 
-  &__menu {
-    height: 40px;
-    align-items: center;
-    box-sizing: border-box;
-  }
-
-  &__item,
-  .subMenu__list {
+  &__item {
     flex: 1;
     text-align: center;
-    padding: 0 10px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
   }
 
-  &__item .item__title {
+  .item__title {
     font-weight: 700;
     font-size: 18px;
     color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 10px 0px;
+
+    &:hover {
+      color: red;
+    }
   }
 
-  .nav__item.active .item__title {
+  .item__title:hover + .subMenu__list {
+    background-color: #444;
+  }
+
+  .nav__item:has(.subMenu__list:hover) .item__title {
     color: red;
   }
 
   .subMenu__list {
-    transition: background-color 0.5s ease;
+    list-style: none;
+    padding: 0 10px;
+    flex-grow: 1;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease,
+      visibility 0.3s ease;
 
-    &.active {
+    &:hover {
       background-color: #444;
     }
   }
 
   .subMenu__item {
-    font-size: 16px;
     color: white;
     padding: 6px 0;
     cursor: pointer;
-    user-select: none;
-    transition: color 0.5s ease;
+    transition: color 0.3s ease;
 
     &:hover {
       color: red;
     }
+  }
+
+  .nav__menu:hover .subMenu__list {
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 }
